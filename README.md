@@ -14,7 +14,9 @@ Open .env file and  customize this line!
     DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"
 
 Now that your connection parameters are setup, Doctrine can create the db_name database for you:
+    ```
     php bin/console doctrine:database:create
+    ```
 ### Migrations: Creating the Database Tables/Schema
     To create the database Tables/Schema, run this command from terminal.
         
