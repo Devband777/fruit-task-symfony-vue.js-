@@ -12,7 +12,7 @@
         </b-list-group>
       </div>
       <div class="col-md-6">
-        <h1>Sum of nutritions facts of all favorite fruit: <span>{{ sumOfNutrition }}</span> </h1>
+        <h1>Sum of nutritions facts of all favorite fruit: <span>{{ getSumOfNutrition }}</span> </h1>
           <a class="btn btn-primary" href="/fruits">Go to List</a>
       </div>
     </div>
@@ -25,15 +25,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
-  data() {
-    return {
-      sumOfNutrition: 0
-    };
-  },
+  name:"favorite",
   computed: {
     ...mapGetters([
       "getFavorites",
-      "getCountFavorites"
+      "getCountFavorites",
+      "getSumOfNutrition"
     ])
   },
   methods: {
@@ -44,19 +41,11 @@ export default {
     removeFromFavorites(fruit, idx) {
       this.$store.dispatch("removeFromFavorite", fruit.id, idx);
     },
-    calculateSumOfNutrition() {
-      console.log("oops")
-      let temp = 0;
-      for (let i = 0; i < this.getFavorites.length; i++) {
-        temp += this.getFavorites[i].protein + this.getFavorites[i].sugar + this.getFavorites[i].fat + this.getFavorites[i].carbohydrates + this.getFavorites[i].calories;
-      }
-      this.sumOfNutrition = temp;
-    },
   },
 
   created() {
     this.fetchFavorites();
-    this.calculateSumOfNutrition();
+    
   },
 };
 </script>

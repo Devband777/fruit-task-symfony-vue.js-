@@ -11,6 +11,7 @@ export default new Vuex.Store({
     favorites: [],
     totalItems: 0,
     countFavorites: 0,
+    sumOfNutrition: 0,
   },
 
   getters: {
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     getTotalItems: (state) => state.totalItems,
     getFavorites: (state) => state.favorites,
     getCountFavorites: (state) => state.countFavorites,
+    getSumOfNutrition: (state) => state.sumOfNutrition
   },
 
   mutations: {
@@ -32,6 +34,9 @@ export default new Vuex.Store({
     },
     SET_COUNTFAVORITES: (state, countFavorites) => {
       state.countFavorites = countFavorites;
+    },
+    SET_SUMOFNUTURITION: (state, sumOfNutrition) => {
+      state.sumOfNutrition = sumOfNutrition;
     },
     SET_FRUIT: (state, fruit) => {
       state.fruit = fruit;
@@ -60,9 +65,10 @@ export default new Vuex.Store({
     async fetchFavorites({ commit }) {
       await FruitDataService.getFavorites()
         .then((response) => {
-          const { favorites } = response.data;
+          const { favorites, sumOfNutrition} = response.data;
           commit("SET_FAVORITES", favorites);
           commit("SET_COUNTFAVORITES", favorites.length);
+          commit("SET_SUMOFNUTURITION", sumOfNutrition);
           console.log(response.data);
         })
         .catch((e) => {

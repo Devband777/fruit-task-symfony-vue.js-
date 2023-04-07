@@ -94,9 +94,13 @@ class FruitController extends AbstractController
      */
     public function favorites(EntityManagerInterface $entityManager): JsonResponse
     {
-        $fruit = $entityManager->getRepository(Fruit::class)
+        $favorites = $entityManager->getRepository(Fruit::class)
             ->findBy(['isFavorite' => true]);
-        return $this->json(["favorites" => $fruit]);
+        $sumOfNuturition = 0;
+        foreach($favorites as $favorite) {
+            $sumOfNuturition += $favorite->getProtein() + $favorite->getSugar() + $favorite->getFat() + $favorite->getCarbohydrates() + $favorite->getCalories();
+        }
+        return $this->json(["favorites" => $favorites, "sumOfNutrition" => round($sumOfNuturition, 2)]);
     }
 
     /**
