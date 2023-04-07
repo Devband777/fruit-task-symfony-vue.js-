@@ -1,0 +1,28 @@
+app:
+    resource: ../src/Controller/
+    type: annotation
+
+api_fruit_index:
+    path: /api/fruit
+    methods: GET
+    controller: App\Controller\FruitController::index
+
+api_fruit_filter:
+    path: /api/fruit/filter
+    methods: GET
+    controller: App\Controller\FruitController::filter
+
+api_fruit_favorites:
+    path: /api/fruit/favorites
+    methods: GET
+    controller: App\Controller\FruitController::favorites
+
+api_fruit_add_to_favorites:
+    path: /api/fruit/{id}/add-to-favorites
+    methods: POST
+    controller: App\Controller\FruitController::addToFavorites
+
+api_fruit_remove_from_favorites:
+    path: /api/fruit/{id}/remove-from-favorites
+    methods: POST
+    controller: App\Controller\FruitController::removeFromFavorites
